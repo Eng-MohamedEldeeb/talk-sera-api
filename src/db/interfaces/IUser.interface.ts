@@ -1,5 +1,6 @@
 import { Types } from 'mongoose';
 import { ISubscription } from './ISubscription.interface';
+import { IDataBaseDoc } from './IDatabaseDoc.interface';
 
 export enum Roles {
   USER = 'user',
@@ -31,12 +32,18 @@ export interface IEarnedBadge {
   earnedAt: Date;
 }
 
-export interface IUser {
-  _id: Types.ObjectId;
-  avatar: string;
+export interface IUserInputs {
   name: string;
+
   email: string;
+
   password: string;
+
+  confirmPassword: string;
+}
+export interface IUser
+  extends Omit<IUserInputs, 'confirmPassword'>, IDataBaseDoc {
+  avatar: string;
 
   xp: number;
   streak: IStreak;
@@ -44,10 +51,10 @@ export interface IUser {
 
   subscription: ISubscription;
   refreshToken: string;
+  googleId: string;
 
-  isVerified: boolean;
   role: Roles;
   authProvider: AuthProvider;
-  createdAt: Date;
-  updatedAt: Date;
+
+  verifiedAt: Date;
 }
