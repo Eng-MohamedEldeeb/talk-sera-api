@@ -1,0 +1,12 @@
+export { AuthModule } from './auth/auth.module';
+export { UserModule } from './user/user.module';
+export { WordModule } from './word/word.module';
+export { FlashCardModule } from './flash-card/flash-card.module';
+export { QuestionModule } from './question/question.module';
+export { QuizModule } from './quiz/quiz.module';
+export { LessonModule } from './lesson/lesson.module';
+export { ProgressModule } from './progress/progress.module';
+export { AttemptModule } from './attempt/attempt.module';
+// export { AiChatModule } from './ai-chat/ai-chat.module';
+export { BadgeModule } from './badge/badge.module';
+export { SubscriptionModule } from './subscription/subscription.module';
