@@ -1,4 +1,4 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { MongooseModule, Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { BadgeConditionType, IBadge } from '../interfaces/IBadge.interface';
 import { HydratedDocument } from 'mongoose';
 
@@ -39,5 +39,9 @@ export class Badge implements Omit<IBadge, '_id' | 'createdAt' | 'updatedAt'> {
   };
 }
 
-export const badgeModel = SchemaFactory.createForClass(Badge);
+export const badgeSchema = SchemaFactory.createForClass(Badge);
+
+export const BadgeModel = MongooseModule.forFeature([
+  { name: Badge.name, schema: badgeSchema },
+]);
 export type TBadgeDocument = HydratedDocument<Badge>;

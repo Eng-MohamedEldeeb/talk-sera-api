@@ -1,4 +1,4 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { MongooseModule, Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import {
   AuthProvider,
   IEarnedBadge,
@@ -74,7 +74,6 @@ export class User implements Omit<IUser, '_id' | 'createdAt' | 'updatedAt'> {
   })
   subscription: {
     plan: SubscriptionPlan;
-
     customerId: string;
     subscriptionId: string;
   };
@@ -82,8 +81,11 @@ export class User implements Omit<IUser, '_id' | 'createdAt' | 'updatedAt'> {
   @Prop()
   refreshToken: string;
 
-  @Prop()
+  @Prop({ type: Date })
   verifiedAt: Date;
+
+  @Prop()
+  verifyToken?: string;
 
   @Prop({
     type: String,
@@ -96,6 +98,10 @@ export class User implements Omit<IUser, '_id' | 'createdAt' | 'updatedAt'> {
   authProvider: AuthProvider;
 }
 
-export const userModel = SchemaFactory.createForClass(User);
+export const userSchema = SchemaFactory.createForClass(User);
 
-export type TUserDocument = HydratedDocument<User>;
+export const UserModel = MongooseModule.forFeature([
+  { name: User.name, schema: userSchema },
+]);
+
+export type UserDocument = HydratedDocument<User>;

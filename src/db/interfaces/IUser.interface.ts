@@ -55,6 +55,6 @@ export interface IUser
 
   role: Roles;
   authProvider: AuthProvider;
-
+  verifyToken?: string;
   verifiedAt: Date;
 }
