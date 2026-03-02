@@ -16,6 +16,8 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   }
   validate(_at: string, _rt: string, profile: Profile, done: VerifyCallback) {
     const { id, name, emails, photos } = profile;
+    console.log({ profile });
+
     done(null, {
       googleId: id,
       email: emails && emails[0].value,

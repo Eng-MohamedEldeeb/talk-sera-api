@@ -1,12 +1,17 @@
 import { IUserInputs } from 'src/db/interfaces/IUser.interface';
 import { IsEmail, IsNotEmpty, IsStrongPassword } from 'class-validator';
 
-export class LoginDTO implements Pick<IUserInputs, 'email' | 'password'> {
+export class ForgotPasswordDTO implements Pick<IUserInputs, 'email'> {
   @IsEmail()
   @IsNotEmpty()
   email: string;
+}
 
+export class ResetPasswordDTO {
   @IsStrongPassword()
   @IsNotEmpty()
-  password: string;
+  newPassword: string;
+
+  @IsNotEmpty()
+  token: string;
 }

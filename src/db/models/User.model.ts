@@ -1,6 +1,7 @@
 import { MongooseModule, Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import {
   AuthProvider,
+  EnglishLevel,
   IEarnedBadge,
   IUser,
   Roles,
@@ -31,7 +32,12 @@ export class User implements Omit<IUser, '_id' | 'createdAt' | 'updatedAt'> {
   @Prop({
     type: String,
     trim: true,
-    required: [true, "email field can't be empty"],
+    required: [
+      function (this: UserDocument) {
+        return Boolean(this.googleId);
+      },
+      'password is required',
+    ],
   })
   password: string;
 
@@ -40,6 +46,13 @@ export class User implements Omit<IUser, '_id' | 'createdAt' | 'updatedAt'> {
     default: 0,
   })
   xp: number;
+
+  @Prop({
+    type: String,
+    enum: EnglishLevel,
+    required: [true, 'english level is required'],
+  })
+  level: EnglishLevel;
 
   @Prop({
     type: {
@@ -86,6 +99,12 @@ export class User implements Omit<IUser, '_id' | 'createdAt' | 'updatedAt'> {
 
   @Prop()
   verifyToken?: string;
+
+  @Prop()
+  resetToken?: string;
+
+  @Prop()
+  resetTokenExpiry?: Date;
 
   @Prop({
     type: String,

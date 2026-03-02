@@ -34,12 +34,10 @@ export interface IEarnedBadge {
 
 export interface IUserInputs {
   name: string;
-
   email: string;
-
   password: string;
-
   confirmPassword: string;
+  level: EnglishLevel;
 }
 export interface IUser
   extends Omit<IUserInputs, 'confirmPassword'>, IDataBaseDoc {
@@ -50,11 +48,13 @@ export interface IUser
   badges: IEarnedBadge[];
 
   subscription: ISubscription;
-  refreshToken: string;
+  refreshToken?: string;
+  verifyToken?: string;
+  resetToken?: string;
+  resetTokenExpiry?: Date;
   googleId: string;
 
   role: Roles;
   authProvider: AuthProvider;
-  verifyToken?: string;
   verifiedAt: Date;
 }

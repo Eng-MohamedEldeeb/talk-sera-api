@@ -10,6 +10,9 @@ export const {
   // Hash
   SALT_ROUNDS,
 
+  // Random String
+  RANDOM_STRING_LENGTH,
+
   // JWT
   JWT_ACCESS_SECRET,
   JWT_REFRESH_SECRET,
@@ -28,6 +31,9 @@ export const {
 
   // Hash
   SALT_ROUNDS: process.env.SALT_ROUNDS,
+
+  // Random String
+  RANDOM_STRING_LENGTH: process.env.RANDOM_STRING_LENGTH,
 
   // JWT
   JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET,
